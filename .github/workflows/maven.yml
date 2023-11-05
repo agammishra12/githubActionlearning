@@ -103,7 +103,7 @@ jobs:
         server_address: smtp.gmail.com
         server_port: 587
         username: 'agammishra18@gmail.com'
-        password: 'krlthdshflcmfqqe'
+        password: 'zsoupwtceotfhain'
         subject: 'Test Report for Selenium Tests'
         to: agam.mishra@thinkitive.com
         from: agammishra18@gmail.com
