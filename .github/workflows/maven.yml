@@ -37,29 +37,75 @@
 
 
 
-name: Selenium with TestNG - CI
+# name: Selenium with TestNG - CI
  
+# on:
+#   push:
+#     branches: [ "main" ]
+#   pull_request:
+#     branches: [ "main" ]
+ 
+# jobs:
+#   build:
+ 
+#     runs-on: macOS-latest
+ 
+#     steps:
+#     - uses: actions/checkout@v3
+#     - name: Set up JDK 11
+#       uses: actions/setup-java@v3
+#       with:
+#         java-version: '11'
+#         distribution: 'temurin'
+#         cache: maven
+     
+#     - uses: browser-actions/setup-chrome@latest
+     
+#     - name: Build with Maven
+#       run: mvn -B clean test
+
+
+
+name: Selenium with TestNG - CI
+
 on:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
- 
+
 jobs:
   build:
- 
     runs-on: macOS-latest
- 
+
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v2
+
     - name: Set up JDK 11
-      uses: actions/setup-java@v3
+      uses: actions/setup-java@v2
       with:
         java-version: '11'
-        distribution: 'temurin'
-        cache: maven
-     
-    - uses: browser-actions/setup-chrome@latest
-     
+
+    - name: Set up Chrome
+      uses: browser-actions/setup-chrome@latest
+
     - name: Build with Maven
       run: mvn -B clean test
+
+    - name: Generate TestNG Emailable Report
+      run: mvn testng:test
+      continue-on-error: true
+
+    - name: Send Email Report
+      uses: dawidd6/action-send-mail@v3
+      with:
+        server_address: smtp.example.com
+        server_port: 587
+        username: 'agammishra18@gmail.com'
+        password: 'krlthdshflcmfqqe'
+        subject: 'Test Report for Selenium Tests'
+        to: agam.mishra@thinkitive.com
+        from: agammishra18@gmail.com
+        body: 'Please find attached the TestNG Emailable Report.'
+        attachments: 'target/surefire-reports/emailable-report.html'
