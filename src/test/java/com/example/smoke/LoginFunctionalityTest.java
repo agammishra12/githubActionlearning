@@ -20,7 +20,6 @@ public class LoginFunctionalityTest extends TestBase {
 		appLibrary.getDriverInstance();
 		appLibrary.launchApp();
 		HomePage ap = new HomePage(appLibrary);
-//		ap.verifyHomePageUi();
 		LoginPage lp = ap.navigateToLoginPage();
 		lp.verifyLoginPageUi();
 		lp.login(getUserID(), getPassword());
