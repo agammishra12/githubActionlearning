@@ -91,10 +91,10 @@ jobs:
       uses: browser-actions/setup-chrome@latest
 
     - name: Build with Maven
-      run: mvn -B clean test
+      run: mvn clean test -Dsurefire.suiteXmlFiles=testng.xml
 
     - name: Generate TestNG Emailable Report
-      run: mvn testng:test
+      run: mvn surefire-report:report
       continue-on-error: true
 
     - name: Send Email Report
