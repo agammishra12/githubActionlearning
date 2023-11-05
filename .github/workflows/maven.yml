@@ -100,7 +100,7 @@ jobs:
     - name: Send Email Report
       uses: dawidd6/action-send-mail@v3
       with:
-        server_address: smtp.example.com
+        server_address: smtp.gmail.com
         server_port: 587
         username: 'agammishra18@gmail.com'
         password: 'krlthdshflcmfqqe'
